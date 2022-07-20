@@ -1,47 +1,11 @@
 import React, { useState, useEffect } from "react";
 import KanbanContainer from "./Kanban/KanbanContainer";
 import withNavBar from "./NavBar/withNavBar";
-const objectData = [
-  {
-    id:3333,
-    title: 'Analysis on 3DS 2.2 implementation',
-    type: 'story',
-    exp: 10
-  }, 
-  {
-    id:4444,
-    title: 'Fix image sizing in navigation drawer',
-    type: 'bug',
-    exp: 2
-  },
-  {
-    id:555,
-    title: 'Analysis on 3DS 2.2 implementation',
-    type: 'story',
-    exp: 10
-  }, 
-  {
-    id:6,
-    title: 'Analysis on 3DS 2.2 implementation',
-    type: 'story',
-    exp: 10
-  }, 
-  {
-    id:777,
-    title: 'Analysis on 3DS 2.2 implementation',
-    type: 'story',
-    exp: 10
-  }, 
-  {
-    id:888,
-    title: 'Analysis on 3DS 2.2 implementation',
-    type: 'story',
-    exp: 10
-  }, 
-]
+import { connect } from "react-redux";
+
 
  //Main App Object
-const App = () => {
+const App = ({objectData, onUpdateLanes}) => {
   const [objects, setObjects] = useState([]);
   // const [selectedObject, setSelectedObject] = useState({});
 
@@ -69,4 +33,16 @@ const App = () => {
   );
 }
 
-export default withNavBar(App);
+const mapStateToProps = (state) =>{ 
+  return ({
+    objectData: state.lanes
+  })
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onUpdateLanes: dispatch.lanes.updateLanes
+  }
+}
+
+export default withNavBar(connect(mapStateToProps,mapDispatchToProps)(App));
