@@ -1,9 +1,11 @@
-import data from "../data/test-tasks.json";
+import initialState from "../data/initialLanesState.json";
 
-export const lanes = {
-    state: data,
+export const laneData = {
+    state: initialState,
     reducers: {
-      updateLanes: (state, payload) => [...state, payload],
+      updateLanes: (state, payload) => {
+        return state = payload
+      },
     },
     effects: (dispatch) => ({
         // handle state changes with impure functions.

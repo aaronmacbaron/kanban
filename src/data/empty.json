@@ -1,0 +1,36 @@
+{
+    "lanes" : [
+    {
+        "id": "ltodo",
+        "title": "TO DO",
+        "tasks":[]
+    },
+    {
+        "id": "linprogress",
+        "title": "In Progress",
+        "tasks":[]
+    },
+    {
+        "id": "lreview",
+        "title": "Review",
+        "tasks":[]
+    },
+    {
+        "id": "lqa",
+        "title": "QA",
+        "tasks":[]
+    },
+    {
+        "id": "ldone",
+        "title": "Done",
+        "tasks":[]
+    },
+    {
+        "id": "ldeployed",
+        "title": "Deployed",
+        "tasks":[]
+    }
+  ],
+  "selectedItem" : {}
+
+}

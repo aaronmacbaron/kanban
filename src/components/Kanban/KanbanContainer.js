@@ -17,9 +17,9 @@ const Tracker = styled.span`
     left: ${props => props.left ?? 0}px;
 `
 
-const KanbanContainer = ({tasks}) => {
+const KanbanContainer = ({laneData}) => {
+    
     const [lanePositions, setLanePositions] = useState([]);
-    const laneTitles = ["To Do", "In Progress", "Review", "QA", "Done", "Deployed"];
     const [trackerX, setTrackerX] = useState(0);
     const [trackerY, setTrackerY] = useState(0);
 
@@ -49,11 +49,15 @@ const KanbanContainer = ({tasks}) => {
     return (
         <Container>
             <Tracker top={trackerY} left={trackerX} />
-            {laneTitles.map((laneTitle) => {
-                if(laneTitle === "To Do")
-                    return <KanbanLane key={`kanbanLane-${laneTitle}`} title={laneTitle} tasks={tasks} handleDragStop={onDragStop} updateLanePosition={onUpdateLanePositions}/>
-                else
-                    return <KanbanLane key={`kanbanLane-${laneTitle}`} title={laneTitle} handleDragStop={onDragStop} updateLanePosition={onUpdateLanePositions}/>
+            {laneData && laneData.map((laneObject) => {
+                return <KanbanLane 
+                            key={`kanbanLane-${laneObject.title}`} 
+                            title={laneObject.title} 
+                            tasks={laneObject.tasks} 
+                            handleDragStop={onDragStop} 
+                            updateLanePosition={onUpdateLanePositions}
+                        />
+                
             })}
         </Container>
     )

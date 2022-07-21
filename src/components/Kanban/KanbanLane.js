@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import TaskItem from "../TaskItem/TaskItem";
+import { connect } from "react-redux";
 
 const Lane = styled.div`
     background:#eee;
@@ -12,8 +13,21 @@ const Lane = styled.div`
 const LaneWrapper = styled.div`
     
 `
-const KanbanLane = ({tasks, title, handleDragStop, updateLanePosition}) => {
+const KanbanLane = ({tasks, title, handleDragStop, laneData, onUpdateLanes}) => {
     const laneRef = useRef();
+
+    const updateLanePosition = (data) => {
+        let overwritableData = laneData;
+        let newLaneData = laneData.lanes;
+        newLaneData.forEach((l) => {
+            if(l.title === data.title){
+                const { top, left, width, height } = data
+                l.lanePosition = {top, left, width, height}
+            }
+        });
+        overwritableData.lanes = newLaneData;
+        onUpdateLanes(overwritableData);
+    }
 
     useEffect( ()=> {
         updateLanePosition({
@@ -43,4 +57,18 @@ const KanbanLane = ({tasks, title, handleDragStop, updateLanePosition}) => {
     )
 }
 
-export default KanbanLane;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onUpdateLanes: dispatch.laneData.updateLanes
+    }
+}
+
+const mapStateToProps = (state) =>{ 
+    return ({
+      laneData: state.laneData
+    })
+  };
+
+
+
+export default connect( mapStateToProps, mapDispatchToProps)(KanbanLane);

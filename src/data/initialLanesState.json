@@ -1,0 +1,43 @@
+{
+    "lanes" : 
+    [
+        {
+            "id": "ltodo",
+            "title": "TO DO",
+            "tasks":[],
+            "lanePosition" : {}
+        },
+        {
+            "id": "linprogress",
+            "title": "In Progress",
+            "tasks":[],
+            "lanePosition" : {}
+        },
+        {
+            "id": "lreview",
+            "title": "Review",
+            "tasks":[],
+            "lanePosition" : {}
+        },
+        {
+            "id": "lqa",
+            "title": "QA",
+            "tasks":[],
+            "lanePosition" : {}
+        },
+        {
+            "id": "ldone",
+            "title": "Done",
+            "tasks":[],
+            "lanePosition" : {}
+        },
+        {
+            "id": "ldeployed",
+            "title": "Deployed",
+            "tasks":[],
+            "lanePosition" : {}
+        }
+  ],
+  "selectedItem" : {}
+
+}
