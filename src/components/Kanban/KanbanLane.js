@@ -13,7 +13,7 @@ const Lane = styled.div`
 const LaneWrapper = styled.div`
     
 `
-const KanbanLane = ({tasks, title, handleDragStop, laneData, onUpdateLanes}) => {
+const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, selectedItem}) => {
     const laneRef = useRef();
 
     const updateLanePosition = (data) => {
@@ -27,6 +27,54 @@ const KanbanLane = ({tasks, title, handleDragStop, laneData, onUpdateLanes}) => 
         });
         overwritableData.lanes = newLaneData;
         onUpdateLanes(overwritableData);
+    }
+
+    const findProperLane = (x,y) => {
+        let laneTitle;
+        console.log(laneData)
+        laneData.lanes.forEach((pos) => {
+            const { width, height, top, left } = pos.lanePosition;
+            if( x > left && x < left+width && y > top && y < top+height)
+                laneTitle = pos.title;
+        })
+        return laneTitle;
+    }
+
+    const handleDragStop = (event) => {
+        if(false === selectedItem)
+            return;
+
+        const {clientX, clientY} = event;
+        const properLane = findProperLane(clientX,clientY);
+        let overwritableData = laneData;
+        let newLaneData = [...laneData.lanes];
+        newLaneData.forEach((l) => {
+            if(l.title === properLane){
+                if(l.tasks.filter((task) => {
+                    return task.id === selectedItem.id
+                }).length < 1){
+                    if(!(false === selectedItem))
+                        l.tasks.push(selectedItem)
+                }
+            } else {
+                if(l.tasks.filter((task) => {
+                    return task.id === selectedItem.id
+                }).length > 0) {
+                    l.tasks.forEach((task, taskIndex, taskArray) => {
+                        if(task.id === selectedItem.id){
+                            taskArray.splice(taskIndex, 1);
+                        }
+                    });
+
+                }
+            }
+        });
+        overwritableData.lanes = newLaneData;
+        onUpdateLanes(overwritableData);
+    }
+
+    const handleSelectItem = (selectedItem) => {
+        onSelectItem(selectedItem);
     }
 
     useEffect( ()=> {
@@ -44,13 +92,16 @@ const KanbanLane = ({tasks, title, handleDragStop, laneData, onUpdateLanes}) => 
             <h4>{title}</h4>
             <Lane ref={laneRef}>
                 {tasks && tasks.map( (item) => {
-                    return <TaskItem 
-                                key={item.id} 
-                                title={item.title} 
-                                type={item.type} 
-                                exp={item.exp} 
-                                handleStop={handleDragStop}
-                            />
+                    if(item && item.id)
+                        return <TaskItem 
+                                    id={item.id}
+                                    key={item.id} 
+                                    title={item.title} 
+                                    type={item.type} 
+                                    exp={item.exp} 
+                                    handleStop={handleDragStop}
+                                    onSelect={handleSelectItem}
+                                />
                 })}
             </Lane>
         </LaneWrapper>
@@ -59,13 +110,16 @@ const KanbanLane = ({tasks, title, handleDragStop, laneData, onUpdateLanes}) => 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onUpdateLanes: dispatch.laneData.updateLanes
+        onUpdateLanes: dispatch.laneData.updateLanes,
+        onSelectItem: dispatch.laneData.selectItem
+
     }
 }
 
 const mapStateToProps = (state) =>{ 
     return ({
-      laneData: state.laneData
+      laneData: state.laneData,
+      selectedItem: state.laneData.selectedItem
     })
   };
 

@@ -6,6 +6,9 @@ export const laneData = {
       updateLanes: (state, payload) => {
         return state = payload
       },
+      selectItem: (state, payload) => {
+        return {...state, selectedItem : payload}
+      }
     },
     effects: (dispatch) => ({
         // handle state changes with impure functions.

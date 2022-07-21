@@ -16,7 +16,14 @@
         {
             "id": "lreview",
             "title": "Review",
-            "tasks":[],
+            "tasks":[
+                {
+                    "id": 3333,
+                    "title": "Analysis on 3DS 2.2 implementation",
+                    "type": "story",
+                    "exp": 10
+                }
+            ],
             "lanePosition" : {}
         },
         {

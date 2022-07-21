@@ -9,11 +9,15 @@ const TaskContainer = styled(Card)`
     height:100px;
 `
 
-const TaskItem = ({ id, type, title, exp, handleStop}) => {
+const TaskItem = ({ id, type, title, exp, handleStop, onSelect}) => {
+
+    const handleOnSelect = () => {
+        onSelect({id, type, title, exp});
+    }
 
     return (
         <Draggable onStop={handleStop}>
-            <TaskContainer className="card">
+            <TaskContainer className="card" onClick={handleOnSelect}>
                 <div className="content">
                     {/* <img className="right floated mini ui image" src="/images/avatar/large/elliot.jpg" /> */}
                     <div className="header">
