@@ -7,6 +7,7 @@ const TaskContainer = styled(Card)`
     margin-bottom:7px;
     padding:10px;
     height:100px;
+    cursor:pointer;
 `
 
 const TaskItem = ({ id, type, title, exp, handleStop, onSelect}) => {
@@ -17,18 +18,15 @@ const TaskItem = ({ id, type, title, exp, handleStop, onSelect}) => {
 
     return (
         <Draggable onStop={handleStop}>
-            <TaskContainer className="card" onClick={handleOnSelect}>
+            <TaskContainer className="card" onMouseDownCapture={handleOnSelect}>
                 <div className="content">
-                    {/* <img className="right floated mini ui image" src="/images/avatar/large/elliot.jpg" /> */}
-                    <div className="header">
-                        {type}
+                    <div className="description">
+                            {title}
                     </div>
                     <div className="meta">
-                        {exp}
+                        XP Granted: <meter value={exp/10}></meter>
                     </div>
-                    <div className="description">
-                        {title}
-                    </div>
+                    
                 </div>
             </TaskContainer>
         </Draggable>

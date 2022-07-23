@@ -7,7 +7,10 @@ export const laneData = {
         return state = payload
       },
       selectItem: (state, payload) => {
-        return {...state, selectedItem : payload}
+        return {...state, selectedItem : {...payload}}
+      },
+      setMaxEarnableExp: (state, payload) =>{
+        return {...state, maxEarnableExp: {...payload}}
       }
     },
     effects: (dispatch) => ({
@@ -15,7 +18,7 @@ export const laneData = {
         // use async/await for async actions
         async updateLanesAsync(payload, rootState) {
           await new Promise((resolve) => setTimeout(resolve, 1000));
-          dispatch.count.updateLanes(payload);
+          dispatch.lanes.updateLanes(payload);
         },
       }),
   };

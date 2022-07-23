@@ -19,9 +19,21 @@
             "tasks":[
                 {
                     "id": 3333,
-                    "title": "Analysis on 3DS 2.2 implementation",
+                    "title": "Write logic to snap tasks to lanes",
                     "type": "story",
                     "exp": 10
+                },
+                {
+                "id": 4444,
+                "title": "Build Drawer or Sidebar for showing task details",
+                "type": "bug",
+                "exp": 2
+                },
+                {
+                "id": 555,
+                "title": "Build out experience points logic",
+                "type": "story",
+                "exp": 10
                 }
             ],
             "lanePosition" : {}

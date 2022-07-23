@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import styled from "@emotion/styled";
-import TaskItem from "../TaskItem/TaskItem";
 import { connect } from "react-redux";
+
+import TaskItem from "../TaskItem/TaskItem";
+
 
 const Lane = styled.div`
     background:#eee;
     border-radius:6px;
-    width:300px;
-    min-height:80vh;
+    width:13.2vw;
+    min-height:90vh;
     padding:5px;
 `
 const LaneWrapper = styled.div`
@@ -31,7 +33,6 @@ const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, select
 
     const findProperLane = (x,y) => {
         let laneTitle;
-        console.log(laneData)
         laneData.lanes.forEach((pos) => {
             const { width, height, top, left } = pos.lanePosition;
             if( x > left && x < left+width && y > top && y < top+height)
@@ -46,8 +47,9 @@ const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, select
 
         const {clientX, clientY} = event;
         const properLane = findProperLane(clientX,clientY);
-        let overwritableData = laneData;
+        let overwritableData = {...laneData};
         let newLaneData = [...laneData.lanes];
+        
         newLaneData.forEach((l) => {
             if(l.title === properLane){
                 if(l.tasks.filter((task) => {
@@ -60,12 +62,14 @@ const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, select
                 if(l.tasks.filter((task) => {
                     return task.id === selectedItem.id
                 }).length > 0) {
-                    l.tasks.forEach((task, taskIndex, taskArray) => {
-                        if(task.id === selectedItem.id){
-                            taskArray.splice(taskIndex, 1);
+                    let tempTasks = [];
+                    l.tasks.forEach((task,) => {
+                        if(task.id && task.id !== selectedItem.id){
+                            tempTasks.push(task)
                         }
+                        
                     });
-
+                    l.tasks = tempTasks
                 }
             }
         });

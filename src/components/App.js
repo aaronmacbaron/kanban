@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { Grid } from "@mui/material";
+
 import KanbanContainer from "./Kanban/KanbanContainer";
 import withNavBar from "./NavBar/withNavBar";
-import { connect } from "react-redux";
+import KanbanInspector from "./Kanban/KanbanInspector";
 
 
  //Main App Object
@@ -15,9 +18,16 @@ const App = ({laneData}) => {
   }, [])  
 
   return (
-    <div className="App">
-      <KanbanContainer laneData={objects.lanes} />
-    </div>
+    // <AppContainer className="App">
+    <Grid container spacing={2}>
+      <Grid item xs={10}>
+        <KanbanContainer laneData={objects.lanes} />
+      </Grid>
+      <Grid item xs={2}>
+        <KanbanInspector />
+      </Grid>
+    </Grid>
+    // </AppContainer>
   );
 }
 
