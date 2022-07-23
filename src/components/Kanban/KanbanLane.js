@@ -15,7 +15,15 @@ const Lane = styled.div`
 const LaneWrapper = styled.div`
     
 `
-const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, selectedItem}) => {
+const KanbanLane = ({
+    tasks,
+    title,
+    laneData, 
+    onUpdateLanes, 
+    onSelectItem, 
+    selectedItem,
+    maxEarnableExp 
+}) => {
     const laneRef = useRef();
 
     const updateLanePosition = (data) => {
@@ -105,6 +113,7 @@ const KanbanLane = ({tasks, title, laneData, onUpdateLanes, onSelectItem, select
                                     exp={item.exp} 
                                     handleStop={handleDragStop}
                                     onSelect={handleSelectItem}
+                                    maxEarnableExp={maxEarnableExp}
                                 />
                 })}
             </Lane>
@@ -116,14 +125,14 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onUpdateLanes: dispatch.laneData.updateLanes,
         onSelectItem: dispatch.laneData.selectItem
-
     }
 }
 
 const mapStateToProps = (state) =>{ 
     return ({
       laneData: state.laneData,
-      selectedItem: state.laneData.selectedItem
+      selectedItem: state.laneData.selectedItem,
+      maxEarnableExp: state.laneData.maxEarnableExp
     })
   };
 

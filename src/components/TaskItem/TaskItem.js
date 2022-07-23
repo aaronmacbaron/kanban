@@ -10,8 +10,8 @@ const TaskContainer = styled(Card)`
     cursor:pointer;
 `
 
-const TaskItem = ({ id, type, title, exp, handleStop, onSelect}) => {
-
+const TaskItem = ({ id, type, title, exp, handleStop, onSelect, maxEarnableExp}) => {
+    console.log(maxEarnableExp)
     const handleOnSelect = () => {
         onSelect({id, type, title, exp});
     }
@@ -24,7 +24,7 @@ const TaskItem = ({ id, type, title, exp, handleStop, onSelect}) => {
                             {title}
                     </div>
                     <div className="meta">
-                        XP Granted: <meter value={exp/10}></meter>
+                        XP Granted: <meter value={exp/maxEarnableExp}></meter>
                     </div>
                     
                 </div>

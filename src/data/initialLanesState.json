@@ -57,6 +57,7 @@
             "lanePosition" : {}
         }
   ],
-  "selectedItem" : {}
+  "selectedItem" : {},
+  "maxEarnableExp" : 0
 
 }

@@ -1,4 +1,9 @@
 import React from "react";
+import styled from "@emotion/styled";
+
+const NavButton = styled.div`
+    cursor:pointer;
+`
 
 const withNavBar = Component => {
     return () => {
@@ -8,6 +13,9 @@ const withNavBar = Component => {
                 <a className="active item" href="/">
                     Home
                 </a>
+                <NavButton className="item">
+                    +Add Task
+                </NavButton>
                 <div className="right menu">
                     <a className="ui item" href="/">
                     Logout
@@ -19,5 +27,7 @@ const withNavBar = Component => {
         )
     }
 }
+
+
 
 export default withNavBar;

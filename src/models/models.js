@@ -10,8 +10,8 @@ export const laneData = {
         return {...state, selectedItem : {...payload}}
       },
       setMaxEarnableExp: (state, payload) =>{
-        return {...state, maxEarnableExp: {...payload}}
-      }
+        return {...state, maxEarnableExp: payload}
+      },
     },
     effects: (dispatch) => ({
         // handle state changes with impure functions.
@@ -21,4 +21,14 @@ export const laneData = {
           dispatch.lanes.updateLanes(payload);
         },
       }),
+  };
+
+  export const userData = {
+    state: {},
+    reducers: {
+
+    },
+    effects: (dispatch) => ({
+
+    })
   };

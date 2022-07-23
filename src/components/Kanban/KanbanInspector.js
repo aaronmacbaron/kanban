@@ -20,8 +20,10 @@ const Heading = styled.h3`
     text-align:center;
 `
 
+const DEBUG = true;
 
-const KanbanInspector = ({selectedItem}) => {
+
+const KanbanInspector = ({selectedItem, laneData}) => {
     
     return (
         <CenterWrapper>
@@ -30,6 +32,13 @@ const KanbanInspector = ({selectedItem}) => {
                 { selectedItem && (
                    <FieldList data={selectedItem}/>
                 )}
+                 
+                { DEBUG && (
+                    <>
+                     <Heading>REACT State</Heading>
+                     <FieldList data={laneData}/>
+                   </>
+                )}
             </InspectorContainer>
         </CenterWrapper>
     )
@@ -37,7 +46,8 @@ const KanbanInspector = ({selectedItem}) => {
 
 const mapState = (state) => {
     return {
-        selectedItem: state.laneData.selectedItem
+        selectedItem: state.laneData.selectedItem,
+        laneData: state.laneData
     };
 }
 

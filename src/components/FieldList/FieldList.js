@@ -7,7 +7,7 @@ const buildForm = (data) => {
         return (
             <div className="field" key={`${k}-${i}`}>
                 <label>{k.toUpperCase()}</label>
-                <input type="text" name={k} placeholder={k.toLocaleUpperCase()} value={data[k]}/>
+                <input type="text" name={k} placeholder={k.toLocaleUpperCase()} value={data[k] instanceof Object ? JSON.stringify(data[k]) : data[k]}/>
             </div>
         )
     })
